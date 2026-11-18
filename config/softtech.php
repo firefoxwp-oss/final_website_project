@@ -14,8 +14,9 @@ return [
             .'Desarrolla aplicaciones web y móviles que aplican inteligencia artificial al procesamiento de audio y video.',
         'ciudad' => 'Santa Cruz de la Sierra, Bolivia',
         'correo' => env('SOFTTECH_CORREO', 'contacto@softtech.com.bo'),
-        // Buzón que recibe los mensajes del formulario (puede ser distinto del correo público).
-        'correo_destino' => env('SOFTTECH_CORREO_DESTINO', env('SOFTTECH_CORREO', 'contacto@softtech.com.bo')),
+        // Buzón que recibe los mensajes del formulario (puede ser distinto del correo público);
+        // si la variable está vacía se usa el correo público
+        'correo_destino' => env('SOFTTECH_CORREO_DESTINO') ?: env('SOFTTECH_CORREO', 'contacto@softtech.com.bo'),
         'horario' => 'Lunes a viernes, de 8:30 a 18:30',
     ],
 
