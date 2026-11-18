@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: ui-sans-serif, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    /* Colores de la marca SoftTech */
+    --color-marca-50: #eff6ff;
+    --color-marca-100: #dbeafe;
+    --color-marca-200: #bfdbfe;
+    --color-marca-500: #3b82f6;
+    --color-marca-600: #1f63b8;
+    --color-marca-700: #1f4e79;
+    --color-marca-800: #173a5c;
+}
