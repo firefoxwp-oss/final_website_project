@@ -1,0 +1,56 @@
+# Integración continua y despliegue del sitio web corporativo: en cada pull
+# request revisa el estándar de codificación (Pint) y ejecuta las pruebas; en
+# cada cambio de la rama main publica el sitio en Azure App Service.
+name: Despliegue del sitio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+
+      - name: Dependencias
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Configuración de pruebas
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Estándar de codificación (Pint)
+        run: vendor/bin/pint --test
+
+      - name: Pruebas
+        run: php artisan test
+
+  desplegar:
+    needs: pruebas
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+
+      - name: Dependencias de producción
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      - name: Publicar en Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: softtech-sitio
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
