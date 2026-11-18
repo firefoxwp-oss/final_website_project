@@ -35,6 +35,14 @@ class SitioTest extends TestCase
             ->assertSee('3 canciones al mes');
     }
 
+    public function test_detras_del_proxy_de_azure_los_enlaces_usan_https(): void
+    {
+        $this->get('/', ['X-Forwarded-Proto' => 'https'])
+            ->assertOk()
+            ->assertSee('https://localhost/contacto', false)
+            ->assertDontSee('http://localhost/contacto', false);
+    }
+
     public function test_el_chat_solo_se_carga_si_esta_configurado(): void
     {
         config(['softtech.tawk' => ['propiedad' => null, 'widget' => null]]);
