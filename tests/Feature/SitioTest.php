@@ -19,7 +19,7 @@ class SitioTest extends TestCase
             ->assertSee('Planes')
             ->assertSee('Premium')
             ->assertSee('Descargas')
-            ->assertSee('/descargas/karaoke-v1.2.0.apk')
+            ->assertSee('https://drive.google.com/file/d/10dVsUT0tKkR-SMDfQUGUGi7XI9zgsgZ9/view?usp=sharing', false)
             ->assertSee('Preguntas frecuentes')
             ->assertSee('Contacto')
             ->assertSee('Asistente SoftTech');
