@@ -65,13 +65,15 @@ return [
         .'transferencia bancaria y activamos tu plan en tu cuenta.',
 
     'descargas' => [
-        // Carpeta pública donde están los instaladores (Azure Blob Storage en producción).
+        // Carpeta pública de los instaladores; una versión con 'url' propia (Google Drive) la usa en su lugar.
         'url_base' => env('DESCARGAS_URL', '/descargas'),
         'versiones' => [
             [
                 'version' => '1.2.0',
                 'fecha' => '17/11/2026',
                 'archivo' => 'karaoke-v1.2.0.apk',
+                // Instalador publicado en Google Drive (el mismo enlace del código QR)
+                'url' => env('DESCARGA_APK_URL', 'https://drive.google.com/file/d/10dVsUT0tKkR-SMDfQUGUGi7XI9zgsgZ9/view?usp=sharing'),
                 'cambios' => [
                     'Modo Karaoke en el celular con la letra sincronizada y la voz guía.',
                     'Cambio de tono del instrumental.',
